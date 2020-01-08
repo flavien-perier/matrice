@@ -1,5 +1,4 @@
 #include "Matrice.h"
-#include "stdafx.h"
 
 #include <math.h>
 #include <iostream>
@@ -32,7 +31,7 @@ void Matrice<TYPE>::init(unsigned int height, unsigned int width) {
 
 	for (i = 0; i < a_height; i++) {
 		for (j = 0; j < a_width; j++) {
-			*(*(a_matrice + i) + j) = NULL;
+			*(*(a_matrice + i) + j) = 0;
 		}
 	}
 }
@@ -114,8 +113,7 @@ template <class TYPE>
 TYPE Matrice<TYPE>::getDeterminant() {
 	if (!this->isSquare()) {
 		throw - 1;
-	}
-	else if (a_height < 2) {
+	} else if (a_height < 2) {
 		throw - 2;
 	}
 
@@ -125,8 +123,7 @@ TYPE Matrice<TYPE>::getDeterminant() {
 		const TYPE c = *(*(a_matrice + 1) + 0);
 		const TYPE d = *(*(a_matrice + 1) + 1);
 		return (a * d) - (b * c);
-	}
-	else {
+	} else {
 		unsigned int i;
 		TYPE determinant = 0;
 
@@ -153,8 +150,7 @@ template <class TYPE>
 Matrice<TYPE> Matrice<TYPE>::getComatrice() {
 	if (!this->isSquare()) {
 		throw - 1;
-	}
-	else if (a_height < 2) {
+	} else if (a_height < 2) {
 		throw - 2;
 	}
 	unsigned int i, j;
@@ -188,16 +184,20 @@ Matrice<TYPE> Matrice<TYPE>::getGauss() {
 		throw - 1;
 	}
 	unsigned int i, j, k;
-	TYPE pivaut, lineCoef, value;
+	TYPE pivot, lineCoef, value;
 	Matrice<TYPE> returnedMatrice(a_width, a_height);
-	for (i = 0; i < a_height && i < a_width; i++) {
-		pivaut = *(*(a_matrice + i) + i);
+	for (i = 0; i < a_height; i++) {
+		pivot = *(*(a_matrice + i) + i);
+
+		if (pivot == 0) {
+			throw - 1;
+		}
 
 		for (j = i + 1; j < a_height; j++) {
 			lineCoef = *(*(a_matrice + j) + i);
 
 			for (k = i; k < a_width; k++) {
-				value = *(*(a_matrice + j) + k) * pivaut - *(*(a_matrice + i) + k) * lineCoef;
+				value = *(*(a_matrice + j) + k) * pivot - *(*(a_matrice + i) + k) * lineCoef;
 				returnedMatrice.set(j, k, value);
 			}
 		}

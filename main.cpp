@@ -1,13 +1,10 @@
-#include "stdafx.h"
-#include "Matrice.cpp"
+#include "./lib/Matrice.cpp"
 
 #include <iostream>
 
 using namespace std;
 
 int main() {
-	int stop;
-
 	Matrice<double> test(3, 3);
 	Matrice<double> solutions(3, 1);
 
@@ -44,8 +41,6 @@ int main() {
 
 	cout << "Matrice Solutions (Cramer): " << endl;
 	test.resolvSystemWithCramer(solutions).showConsole();
-
-	cin >> stop;
 
 	return 0;
 }
