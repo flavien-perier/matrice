@@ -1,11 +1,14 @@
 #ifndef DEF_MATRICE
 #define DEF_MATRICE
 
+#include <vector>
+
 template <class TYPE = double>
 class Matrice {
 public:
 	Matrice();
 	Matrice(unsigned int height, unsigned int width);
+	Matrice(std::vector<std::vector<TYPE>> values);
 	~Matrice();
 
 	unsigned int getHeight();
@@ -80,9 +83,8 @@ private:
 	Matrice<TYPE> multiplyTwoMatrices(Matrice<TYPE> &matrice);
 	Matrice<TYPE> multiblyWithReal(TYPE value);
 
-	TYPE **p_matrice;
-
 protected:
+	TYPE **p_matrice;
 	unsigned int p_height;
 	unsigned int p_width;
 };

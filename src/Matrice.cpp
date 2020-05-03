@@ -1,9 +1,9 @@
 #include "Matrice.hh"
 
-#include <stdlib.h>
-#include <stdio.h>
 #include <math.h>
 #include <typeinfo>
+#include <iostream>
+#include <vector>
 
 template <class TYPE>
 Matrice<TYPE>::Matrice() {
@@ -13,6 +13,25 @@ Matrice<TYPE>::Matrice() {
 template <class TYPE>
 Matrice<TYPE>::Matrice(unsigned int height, unsigned int width) {
 	init(height, width);
+
+	unsigned int i, j;
+	for (i = 0; i < p_height; i++) {
+		for (j = 0; j < p_width; j++) {
+			p_matrice[i][j] = 0;
+		}
+	}
+}
+
+template <class TYPE>
+Matrice<TYPE>::Matrice(std::vector<std::vector<TYPE>> values) {
+	init(values.size(), values.at(0).size());
+
+	unsigned int i, j;
+	for (i = 0; i < p_height; i++) {
+		for (j = 0; j < p_width; j++) {
+			p_matrice[i][j] = values.at(i).at(j);
+		}
+	}
 }
 
 template <class TYPE>
@@ -29,16 +48,10 @@ void Matrice<TYPE>::init(unsigned int height, unsigned int width) {
 	p_width = width;
 
 	p_matrice = new TYPE*[p_height];
-	unsigned int i, j;
-
+	
+	unsigned int i;
 	for (i = 0; i < p_height; i++) {
 		p_matrice[i] = new TYPE[p_width];
-	}
-
-	for (i = 0; i < p_height; i++) {
-		for (j = 0; j < p_width; j++) {
-			p_matrice[i][j] = 0;
-		}
 	}
 }
 
@@ -329,12 +342,9 @@ Matrice<TYPE> Matrice<TYPE>::verticalMiror() {
 
 template <class TYPE>
 TYPE Matrice<TYPE>::getDeterminant() {
-	if (!isSquare()) {
+	if (!isSquare() || p_height < 2) {
 		throw -1;
-	} else if (p_height < 2) {
-		throw -2;
 	}
-
 	if (p_height == 2) {
 		const TYPE a = p_matrice[0][0];
 		const TYPE b = p_matrice[0][1];
@@ -366,10 +376,8 @@ Matrice<TYPE> Matrice<TYPE>::getTransformee() {
 
 template <class TYPE>
 Matrice<TYPE> Matrice<TYPE>::getComatrice() {
-	if (!isSquare()) {
+	if (!isSquare() || p_height < 2) {
 		throw -1;
-	} else if (p_height < 2) {
-		throw -2;
 	}
 	unsigned int i, j;
 	Matrice<TYPE> returnedMatrice(p_width, p_height);
@@ -453,9 +461,15 @@ void Matrice<TYPE>::print() {
 	unsigned int i, j;
 	for (i = 0; i < p_height; i++) {
 		for (j = 0; j < p_width; j++) {
-			printf("| %.2f |",  p_matrice[i][j]);
+			if (typeid(TYPE&) == typeid(float&) || typeid(TYPE&) == typeid(double&)) {
+				printf(" | %.2f",  (double)p_matrice[i][j]);
+			} else if (typeid(TYPE&) == typeid(int&)) {
+				printf(" | %d",  (int)p_matrice[i][j]);
+			} else {
+				printf(" | object");
+			}
 		}
-		printf("\n");
+		printf(" |\n");
 	}
 	printf("\n");
 }
