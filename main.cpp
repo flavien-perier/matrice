@@ -1,10 +1,12 @@
 #include "./src/Matrice.cpp"
 
-#include <iostream>
-
-using namespace std;
-
 int main() {
+	/*double values[3][3] = { 
+		{1.0, -1.0, 1.0},
+		{1.0, 1.0, -1.0},
+		{2.0, -1.0, 2.0}
+	};*/
+
 	Matrice<double> test(3, 3);
 	Matrice<double> solutions(3, 1);
 
@@ -22,25 +24,25 @@ int main() {
 	solutions.set(1, 0, 2);
 	solutions.set(2, 0, 1);
 
-	cout << "Matrice : " << endl;
-	test.showConsole();
+	printf("Matrice : \n");
+	test.print();
 
-	cout << "Determinant : " << test.getDeterminant() << endl;
+	printf("Determinant : %.2f \n", test.getDeterminant());
 
-	cout << "Comatrice : " << endl;
-	test.getComatrice().showConsole();
+	printf("Comatrice : \n");
+	test.getComatrice().print();
 
-	cout << "Adjointe : " << endl;
-	test.getAdjointe().showConsole();
+	printf("Adjointe : \n");
+	test.getAdjointe().print();
 
-	cout << "Inverse : " << endl;
-	test.getInverse().showConsole();
+	printf("Inverse : \n");
+	test.getInverse().print();
 
-	cout << "Matrice Solutions : " << endl;
-	test.resolvSystem(solutions).showConsole();
+	printf("Matrice Solutions : \n");
+	test.resolvSystem(solutions).print();
 
-	cout << "Matrice Solutions (Cramer): " << endl;
-	test.resolvSystemWithCramer(solutions).showConsole();
+	printf("Matrice Solutions (Cramer) : \n");
+	test.resolvSystemWithCramer(solutions).print();
 
 	return 0;
 }

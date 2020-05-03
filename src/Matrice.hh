@@ -13,10 +13,25 @@ public:
 	TYPE get(unsigned int y, unsigned int x);
 	void set(unsigned int y, unsigned int x, TYPE value);
 	void replaceAllValues(TYPE value);
+	Matrice<TYPE> copy();
 
 	bool isSquare();
 	bool isBottomTriangle();
 	bool isTopTriangle();
+
+	Matrice<TYPE> getRow(unsigned int m);
+	Matrice<TYPE> getColumn(unsigned int n);
+	Matrice<TYPE> replaceRow(unsigned int m, Matrice<TYPE> &row);
+	Matrice<TYPE> replaceColumn(unsigned int n, Matrice<TYPE> &column);
+	Matrice<TYPE> deleteRow(unsigned int m);
+	Matrice<TYPE> deleteColumn(unsigned int n);
+
+	Matrice<TYPE> extendTop(Matrice<TYPE> &matrice);
+	Matrice<TYPE> extendBottom(Matrice<TYPE> &matrice);
+	Matrice<TYPE> extendLeft(Matrice<TYPE> &matrice);
+	Matrice<TYPE> extendRight(Matrice<TYPE> &matrice);
+	Matrice<TYPE> horizontalMiror();
+	Matrice<TYPE> verticalMiror();
 
 	TYPE getDeterminant();
 	Matrice<TYPE> getTransformee();
@@ -24,23 +39,10 @@ public:
 	Matrice<TYPE> getAdjointe();
 	Matrice<TYPE> getInverse();
 	Matrice<TYPE> getGauss();
-	Matrice<TYPE> resolvSystem(Matrice<TYPE> solutions);
-	Matrice<TYPE> resolvSystemWithCramer(Matrice<TYPE> solutions);
+	Matrice<TYPE> resolvSystem(Matrice<TYPE> &solutions);
+	Matrice<TYPE> resolvSystemWithCramer(Matrice<TYPE> &solutions);
 
-	Matrice<TYPE> getRow(unsigned int m);
-	Matrice<TYPE> getColumn(unsigned int n);
-	Matrice<TYPE> replaceRow(unsigned int m, Matrice<TYPE> row);
-	Matrice<TYPE> replaceColumn(unsigned int n, Matrice<TYPE> column);
-	Matrice<TYPE> deleteRow(unsigned int m);
-	Matrice<TYPE> deleteColumn(unsigned int n);
-
-	Matrice<TYPE> extendTop(Matrice<TYPE> matrice);
-	Matrice<TYPE> extendBottom(Matrice<TYPE> matrice);
-	Matrice<TYPE> extendLeft(Matrice<TYPE> matrice);
-	Matrice<TYPE> extendRight(Matrice<TYPE> matrice);
-	Matrice<TYPE> horizontalMiror();
-	Matrice<TYPE> verticalMiror();
-	void showConsole();
+	void print();
 
 	static Matrice<TYPE> getI(unsigned int size);
 
@@ -78,11 +80,11 @@ private:
 	Matrice<TYPE> multiplyTwoMatrices(Matrice<TYPE> &matrice);
 	Matrice<TYPE> multiblyWithReal(TYPE value);
 
-	TYPE **a_matrice;
+	TYPE **p_matrice;
 
 protected:
-	unsigned int a_height;
-	unsigned int a_width;
+	unsigned int p_height;
+	unsigned int p_width;
 };
 
 #endif
