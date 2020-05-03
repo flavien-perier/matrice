@@ -1,4 +1,4 @@
-#include "./lib/Matrice.cpp"
+#include "./src/Matrice.cpp"
 
 #include <iostream>
 

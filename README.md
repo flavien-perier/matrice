@@ -4,7 +4,7 @@ Matrix management library.
 
 ## Compile
 
-with g++:
+with make and g++:
 ```sh
-g++ main.cpp lib/*.cpp -o matrice
+make
 ```

@@ -1,4 +1,4 @@
-#include "Matrice.h"
+#include "Matrice.hh"
 
 #include <math.h>
 #include <iostream>

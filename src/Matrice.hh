@@ -1,7 +1,6 @@
 #ifndef DEF_MATRICE
 #define DEF_MATRICE
 
-
 template <class TYPE = double>
 class Matrice {
 public:
